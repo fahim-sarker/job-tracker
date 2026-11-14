@@ -1,7 +1,6 @@
 {
   "name": "job-tracker",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "dev:client": "npm run dev -w client",
     "dev:server": "npm run dev -w server",
@@ -12,9 +11,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
-  "private": "true",
+  "private": true,
   "workspaces": [
     "client",
     "server"
