@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc -p tsconfig.json",
+    "build": "prisma generate && tsc -p tsconfig.json",
     "start": "node dist/index.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:studio": "prisma studio",
+    "predev": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +18,14 @@
   "description": "",
   "private": true,
   "dependencies": {
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "^7.10.1",
     "cors": "^2.8.6",
     "dotenv": "^18.0.10",
     "express": "^5.3.0",
     "helmet": "^8.3.0",
     "morgan": "^1.12.1",
+    "pg": "^8.23.1",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -26,8 +34,10 @@
     "@types/express": "^5.0.6",
     "@types/morgan": "^1.9.10",
     "@types/node": "^22.20.5",
+    "@types/pg": "^8.23.1",
     "eslint": "^10.15.0",
     "globals": "^17.14.0",
+    "prisma": "^7.10.1",
     "tsx": "^4.23.15",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.2"

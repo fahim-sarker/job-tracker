@@ -11,6 +11,24 @@ jobs:
     name: Lint, format and build
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: postgresql://jobtracker:jobtracker@localhost:5432/jobtracker
+
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: jobtracker
+          POSTGRES_PASSWORD: jobtracker
+          POSTGRES_DB: jobtracker
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U jobtracker -d jobtracker"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,3 +50,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Apply database migrations
+        run: npm run db:deploy -w server
